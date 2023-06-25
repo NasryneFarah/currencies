@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         //j'appelle mes différents seeders
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(CurrencySeeder::class);
     }
 }
