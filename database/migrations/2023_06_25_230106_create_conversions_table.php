@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('conversions', function (Blueprint $table) {
             $table->id();
             $table->decimal("ExchangeRate");
+            $table->integer("PairRequest")->default(0);
             $table->timestamps();
 
             //j'ai deux clés étrangères provenant de ma table Currency qui sont censé recupéré l'id des monnaies
