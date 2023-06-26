@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConversionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,19 @@ Route::post('/login', [AuthController::class,'login']);
 
 //Route de l'api de déconnexion
 Route::post('/logout',[AuthController::class,'logout']);
+
+// route pour tester mon api
+Route::get('/test_api', function(){
+    return response()->json(
+       [ 
+        'status' => 'done',
+        'message' => 'Votre api fonctionne'
+        ]
+    );
+});
+
+// Route pour retourner la liste des paires
+Route::get('/listes_pairs', [ConversionController::class,'index']);
+
+// route pour créer une paire
+Route::post('/create_pairs', [ConversionController::class,'store']);
