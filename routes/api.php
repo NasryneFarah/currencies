@@ -26,7 +26,7 @@ Route::post('/login', [AuthController::class,'login']);
 //Route de l'api de déconnexion
 Route::post('/logout',[AuthController::class,'logout']);
 
-// route pour tester mon api
+// Route pour tester mon api
 Route::get('/test_api', function(){
     return response()->json(
        [ 
@@ -39,5 +39,11 @@ Route::get('/test_api', function(){
 // Route pour retourner la liste des paires
 Route::get('/listes_pairs', [ConversionController::class,'index']);
 
-// route pour créer une paire
+// Route pour créer une paire
 Route::post('/create_pairs', [ConversionController::class,'store']);
+
+// Route pour modifier une paire
+Route::put('/edit_pairs/{id}',[ConversionController::class,'update']);
+
+//Route pour supprimer une paire
+Route::delete('delete/{Conversion}',[ConversionController::class,'delete']); //on met le paamètre qu'on veut aller récupérer

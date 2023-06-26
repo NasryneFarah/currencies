@@ -60,7 +60,7 @@ class ConversionController extends Controller
                 'message' => 'La paire de devises existe déjà',
             ]);
         }
-        // si elle n'esxiste pas j'en crée une
+        // si elle n'existe pas j'en crée une
         $convert = new Conversion();
         $convert->ExchangeRate =$request->input('ExchangeRate');
         $convert->SourceCurrency =$request->input('SourceCurrency');
@@ -94,9 +94,42 @@ class ConversionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+
+         $request->validate([
+            'ExchangeRate' =>'required',
+            'SourceCurrency' => 'required',
+            'TargetCurrency' => 'required',
+        ]);
+
+        $convert = Conversion::find($id); //je récupérère une paire grâce à son Id
+
+        $convert->ExchangeRate =$request->input('ExchangeRate');
+        $convert->SourceCurrency =$request->input('SourceCurrency');
+        $convert->TargetCurrency =$request->input('TargetCurrency');
+        $convert->update();
+
+        return response()->json([
+            'status' => 'true',
+            'message' => 'Paire modifié',
+           
+        ]);
+       
+    }
+
+    public function delete(Conversion $id)
+    {
+        try {
+            $id->delete(); //il vérifie la paire exsite et appelle la fonction delete
+            return response()->json([
+                'status' => 'true',
+                'message' => 'Paire supprimée avec succès',
+               
+            ]);
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
     }
 
     /**
